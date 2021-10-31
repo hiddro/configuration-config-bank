@@ -12,3 +12,8 @@ spring:
       discovery:
         locator:
           enabled: true
+      routes:
+        - id: customer-service-bank
+          uri: lb://customer-service-bank
+          predicates:
+            - Path=/customer/**
