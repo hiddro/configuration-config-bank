@@ -25,6 +25,17 @@ spring:
                 statusCodes: 500 
             - StripPrefix=2
             - RewritePath=/api/customer/(?<segment>.*), /$\{segment}
+        - id: fixedterm-service-bank
+          uri: lb://fixedterm-service-bank
+          predicates:
+            - Path=/api/fixedterm/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: fixedterm
+                statusCodes: 500 
+            - StripPrefix=2
+            - RewritePath=/api/fixedterm/(?<segment>.*), /$\{segment}
 
 resilience4j:
   circuitbreaker:
@@ -39,12 +50,16 @@ resilience4j:
     instances:
       customer:
         base-config: defecto
+      fixedterm:
+        base-config: defecto
   timelimiter:
     configs:
       defecto:
         timeout-duration: 2s
     instances:
       customer:
+        base-config: defecto
+      fixedterm:
         base-config: defecto
 
 management:
