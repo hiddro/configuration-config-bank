@@ -2,8 +2,6 @@ server:
   port: 8081
 
 spring:
-  application:
-    name: customer-service-bank
   data:
     mongodb:
       uri: mongodb://localhost:27018/MsBank
