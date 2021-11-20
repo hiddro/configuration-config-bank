@@ -28,6 +28,20 @@ spring:
           filters:
             - StripPrefix=2
             - RewritePath=/api/fixedterm/(?<segment>.*), /$\{segment}
+        - id: current-service-bank
+          uri: lb://current-service-bank
+          predicates:
+            - Path=/api/current/**
+          filters:
+            - StripPrefix=2
+            - RewritePath=/api/current/(?<segment>.*), /$\{segment}
+        - id: saving-service-bank
+          uri: lb://saving-service-bank
+          predicates:
+            - Path=/api/saving/**
+          filters:
+            - StripPrefix=2
+            - RewritePath=/api/saving/(?<segment>.*), /$\{segment}
 
 # resilience4j:
 #   circuitbreaker:
